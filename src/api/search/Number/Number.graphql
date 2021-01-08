@@ -1,0 +1,4 @@
+type Query{
+    atoms: [Atom]!,
+    atom(number: String): Atom
+}
