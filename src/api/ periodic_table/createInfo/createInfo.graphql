@@ -8,6 +8,3 @@ type Mutation {
     ): Description!
 }
 
-type Query{
-    something: String
-}
