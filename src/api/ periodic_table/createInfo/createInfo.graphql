@@ -1,0 +1,9 @@
+type Mutation {
+    createInfo(
+        name: String!
+        Subtitle: String!
+        Text: String!
+        From: String!
+        Author: String
+    ): Description!
+}

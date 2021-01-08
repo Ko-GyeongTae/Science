@@ -1,0 +1,26 @@
+{
+  "name": "science",
+  "version": "1.0.0",
+  "description": "Dsm 2020 Science project",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-node": "0.0.1-security",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^8.2.0",
+    "graphql-tools": "^7.0.2",
+    "graphql-yoga": "^1.18.3",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "prisma-client-lib": "^1.34.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node src/server.js",
+    "generate": "prisma1 generate",
+    "prisma": "npm run deploy && npm run generate",
+    "deploy": "prisma1 deploy"
+  }
+}

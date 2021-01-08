@@ -9,8 +9,9 @@ type Atom {
 
 type Description {
   id: ID! @id 
-  Subtitle: String! @unique
-  Text: String! @unique
+  name: String! 
+  Subtitle: String! 
+  Text: String! 
   From: String!
   Author: String
 }

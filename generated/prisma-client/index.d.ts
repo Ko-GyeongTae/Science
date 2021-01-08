@@ -147,6 +147,8 @@ export interface ClientConstructor<T> {
 export type DescriptionOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
   | "Subtitle_ASC"
   | "Subtitle_DESC"
   | "Text_ASC"
@@ -191,6 +193,20 @@ export interface DescriptionWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
   Subtitle?: Maybe<String>;
   Subtitle_not?: Maybe<String>;
   Subtitle_in?: Maybe<String[] | String>;
@@ -333,8 +349,6 @@ export interface AtomWhereInput {
 
 export type DescriptionWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  Subtitle?: Maybe<String>;
-  Text?: Maybe<String>;
 }>;
 
 export interface AtomCreateInput {
@@ -353,6 +367,7 @@ export interface DescriptionCreateManyInput {
 
 export interface DescriptionCreateInput {
   id?: Maybe<ID_Input>;
+  name: String;
   Subtitle: String;
   Text: String;
   From: String;
@@ -398,6 +413,7 @@ export interface DescriptionUpdateWithWhereUniqueNestedInput {
 }
 
 export interface DescriptionUpdateDataInput {
+  name?: Maybe<String>;
   Subtitle?: Maybe<String>;
   Text?: Maybe<String>;
   From?: Maybe<String>;
@@ -425,6 +441,20 @@ export interface DescriptionScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
   Subtitle?: Maybe<String>;
   Subtitle_not?: Maybe<String>;
   Subtitle_in?: Maybe<String[] | String>;
@@ -492,6 +522,7 @@ export interface DescriptionUpdateManyWithWhereNestedInput {
 }
 
 export interface DescriptionUpdateManyDataInput {
+  name?: Maybe<String>;
   Subtitle?: Maybe<String>;
   Text?: Maybe<String>;
   From?: Maybe<String>;
@@ -506,6 +537,7 @@ export interface AtomUpdateManyMutationInput {
 }
 
 export interface DescriptionUpdateInput {
+  name?: Maybe<String>;
   Subtitle?: Maybe<String>;
   Text?: Maybe<String>;
   From?: Maybe<String>;
@@ -513,6 +545,7 @@ export interface DescriptionUpdateInput {
 }
 
 export interface DescriptionUpdateManyMutationInput {
+  name?: Maybe<String>;
   Subtitle?: Maybe<String>;
   Text?: Maybe<String>;
   From?: Maybe<String>;
@@ -616,6 +649,7 @@ export interface AtomNullablePromise
 
 export interface Description {
   id: ID_Output;
+  name: String;
   Subtitle: String;
   Text: String;
   From: String;
@@ -624,6 +658,7 @@ export interface Description {
 
 export interface DescriptionPromise extends Promise<Description>, Fragmentable {
   id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
   Subtitle: () => Promise<String>;
   Text: () => Promise<String>;
   From: () => Promise<String>;
@@ -634,6 +669,7 @@ export interface DescriptionSubscription
   extends Promise<AsyncIterator<Description>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
   Subtitle: () => Promise<AsyncIterator<String>>;
   Text: () => Promise<AsyncIterator<String>>;
   From: () => Promise<AsyncIterator<String>>;
@@ -644,6 +680,7 @@ export interface DescriptionNullablePromise
   extends Promise<Description | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
   Subtitle: () => Promise<String>;
   Text: () => Promise<String>;
   From: () => Promise<String>;
@@ -879,6 +916,7 @@ export interface DescriptionSubscriptionPayloadSubscription
 
 export interface DescriptionPreviousValues {
   id: ID_Output;
+  name: String;
   Subtitle: String;
   Text: String;
   From: String;
@@ -889,6 +927,7 @@ export interface DescriptionPreviousValuesPromise
   extends Promise<DescriptionPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
   Subtitle: () => Promise<String>;
   Text: () => Promise<String>;
   From: () => Promise<String>;
@@ -899,6 +938,7 @@ export interface DescriptionPreviousValuesSubscription
   extends Promise<AsyncIterator<DescriptionPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
   Subtitle: () => Promise<AsyncIterator<String>>;
   Text: () => Promise<AsyncIterator<String>>;
   From: () => Promise<AsyncIterator<String>>;

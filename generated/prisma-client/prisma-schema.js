@@ -185,6 +185,7 @@ type BatchPayload {
 
 type Description {
   id: ID!
+  name: String!
   Subtitle: String!
   Text: String!
   From: String!
@@ -199,6 +200,7 @@ type DescriptionConnection {
 
 input DescriptionCreateInput {
   id: ID
+  name: String!
   Subtitle: String!
   Text: String!
   From: String!
@@ -218,6 +220,8 @@ type DescriptionEdge {
 enum DescriptionOrderByInput {
   id_ASC
   id_DESC
+  name_ASC
+  name_DESC
   Subtitle_ASC
   Subtitle_DESC
   Text_ASC
@@ -230,6 +234,7 @@ enum DescriptionOrderByInput {
 
 type DescriptionPreviousValues {
   id: ID!
+  name: String!
   Subtitle: String!
   Text: String!
   From: String!
@@ -251,6 +256,20 @@ input DescriptionScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   Subtitle: String
   Subtitle_not: String
   Subtitle_in: [String!]
@@ -331,6 +350,7 @@ input DescriptionSubscriptionWhereInput {
 }
 
 input DescriptionUpdateDataInput {
+  name: String
   Subtitle: String
   Text: String
   From: String
@@ -338,6 +358,7 @@ input DescriptionUpdateDataInput {
 }
 
 input DescriptionUpdateInput {
+  name: String
   Subtitle: String
   Text: String
   From: String
@@ -345,6 +366,7 @@ input DescriptionUpdateInput {
 }
 
 input DescriptionUpdateManyDataInput {
+  name: String
   Subtitle: String
   Text: String
   From: String
@@ -364,6 +386,7 @@ input DescriptionUpdateManyInput {
 }
 
 input DescriptionUpdateManyMutationInput {
+  name: String
   Subtitle: String
   Text: String
   From: String
@@ -401,6 +424,20 @@ input DescriptionWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   Subtitle: String
   Subtitle_not: String
   Subtitle_in: [String!]
@@ -464,8 +501,6 @@ input DescriptionWhereInput {
 
 input DescriptionWhereUniqueInput {
   id: ID
-  Subtitle: String
-  Text: String
 }
 
 scalar Long
