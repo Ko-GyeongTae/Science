@@ -4,7 +4,10 @@ type Mutation {
         Subtitle: String!
         Text: String!
         From: String!
-        Author: String
+        Author: String!
     ): Description!
 }
 
+type Query{
+    something: String
+}
