@@ -1,0 +1,12 @@
+type Mutation {
+    createAtom(
+        Number: String!
+        Name: String!
+        locationX: String!
+        locationY: String!
+    ): Atom!
+}
+
+type Query{
+    something: String
+}
