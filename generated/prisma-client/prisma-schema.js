@@ -17,6 +17,7 @@ type Atom {
   Name: String!
   locationX: String!
   locationY: String!
+  descriptions(where: DescriptionWhereInput, orderBy: DescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Description!]
 }
 
 type AtomConnection {
@@ -31,6 +32,7 @@ input AtomCreateInput {
   Name: String!
   locationX: String!
   locationY: String!
+  descriptions: DescriptionCreateManyInput
 }
 
 type AtomEdge {
@@ -82,6 +84,7 @@ input AtomUpdateInput {
   Name: String
   locationX: String
   locationY: String
+  descriptions: DescriptionUpdateManyInput
 }
 
 input AtomUpdateManyMutationInput {
@@ -162,6 +165,9 @@ input AtomWhereInput {
   locationY_not_starts_with: String
   locationY_ends_with: String
   locationY_not_ends_with: String
+  descriptions_every: DescriptionWhereInput
+  descriptions_some: DescriptionWhereInput
+  descriptions_none: DescriptionWhereInput
   AND: [AtomWhereInput!]
   OR: [AtomWhereInput!]
   NOT: [AtomWhereInput!]
@@ -179,11 +185,11 @@ type BatchPayload {
 
 type Description {
   id: ID!
-  name: String
-  Subtitle: String
-  Text: String
-  From: String
-  Author: String
+  name: String!
+  Subtitle: String!
+  Text: String!
+  From: String!
+  Author: String!
 }
 
 type DescriptionConnection {
@@ -194,11 +200,16 @@ type DescriptionConnection {
 
 input DescriptionCreateInput {
   id: ID
-  name: String
-  Subtitle: String
-  Text: String
-  From: String
-  Author: String
+  name: String!
+  Subtitle: String!
+  Text: String!
+  From: String!
+  Author: String!
+}
+
+input DescriptionCreateManyInput {
+  create: [DescriptionCreateInput!]
+  connect: [DescriptionWhereUniqueInput!]
 }
 
 type DescriptionEdge {
@@ -223,11 +234,101 @@ enum DescriptionOrderByInput {
 
 type DescriptionPreviousValues {
   id: ID!
+  name: String!
+  Subtitle: String!
+  Text: String!
+  From: String!
+  Author: String!
+}
+
+input DescriptionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
   name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   Subtitle: String
+  Subtitle_not: String
+  Subtitle_in: [String!]
+  Subtitle_not_in: [String!]
+  Subtitle_lt: String
+  Subtitle_lte: String
+  Subtitle_gt: String
+  Subtitle_gte: String
+  Subtitle_contains: String
+  Subtitle_not_contains: String
+  Subtitle_starts_with: String
+  Subtitle_not_starts_with: String
+  Subtitle_ends_with: String
+  Subtitle_not_ends_with: String
   Text: String
+  Text_not: String
+  Text_in: [String!]
+  Text_not_in: [String!]
+  Text_lt: String
+  Text_lte: String
+  Text_gt: String
+  Text_gte: String
+  Text_contains: String
+  Text_not_contains: String
+  Text_starts_with: String
+  Text_not_starts_with: String
+  Text_ends_with: String
+  Text_not_ends_with: String
   From: String
+  From_not: String
+  From_in: [String!]
+  From_not_in: [String!]
+  From_lt: String
+  From_lte: String
+  From_gt: String
+  From_gte: String
+  From_contains: String
+  From_not_contains: String
+  From_starts_with: String
+  From_not_starts_with: String
+  From_ends_with: String
+  From_not_ends_with: String
   Author: String
+  Author_not: String
+  Author_in: [String!]
+  Author_not_in: [String!]
+  Author_lt: String
+  Author_lte: String
+  Author_gt: String
+  Author_gte: String
+  Author_contains: String
+  Author_not_contains: String
+  Author_starts_with: String
+  Author_not_starts_with: String
+  Author_ends_with: String
+  Author_not_ends_with: String
+  AND: [DescriptionScalarWhereInput!]
+  OR: [DescriptionScalarWhereInput!]
+  NOT: [DescriptionScalarWhereInput!]
 }
 
 type DescriptionSubscriptionPayload {
@@ -248,6 +349,14 @@ input DescriptionSubscriptionWhereInput {
   NOT: [DescriptionSubscriptionWhereInput!]
 }
 
+input DescriptionUpdateDataInput {
+  name: String
+  Subtitle: String
+  Text: String
+  From: String
+  Author: String
+}
+
 input DescriptionUpdateInput {
   name: String
   Subtitle: String
@@ -256,12 +365,48 @@ input DescriptionUpdateInput {
   Author: String
 }
 
+input DescriptionUpdateManyDataInput {
+  name: String
+  Subtitle: String
+  Text: String
+  From: String
+  Author: String
+}
+
+input DescriptionUpdateManyInput {
+  create: [DescriptionCreateInput!]
+  update: [DescriptionUpdateWithWhereUniqueNestedInput!]
+  upsert: [DescriptionUpsertWithWhereUniqueNestedInput!]
+  delete: [DescriptionWhereUniqueInput!]
+  connect: [DescriptionWhereUniqueInput!]
+  set: [DescriptionWhereUniqueInput!]
+  disconnect: [DescriptionWhereUniqueInput!]
+  deleteMany: [DescriptionScalarWhereInput!]
+  updateMany: [DescriptionUpdateManyWithWhereNestedInput!]
+}
+
 input DescriptionUpdateManyMutationInput {
   name: String
   Subtitle: String
   Text: String
   From: String
   Author: String
+}
+
+input DescriptionUpdateManyWithWhereNestedInput {
+  where: DescriptionScalarWhereInput!
+  data: DescriptionUpdateManyDataInput!
+}
+
+input DescriptionUpdateWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput!
+  data: DescriptionUpdateDataInput!
+}
+
+input DescriptionUpsertWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput!
+  update: DescriptionUpdateDataInput!
+  create: DescriptionCreateInput!
 }
 
 input DescriptionWhereInput {

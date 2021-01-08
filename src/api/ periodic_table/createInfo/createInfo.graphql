@@ -1,5 +1,5 @@
 type Mutation {
-    createInfo(
+    createDescription(
         name: String!
         Subtitle: String!
         Text: String!

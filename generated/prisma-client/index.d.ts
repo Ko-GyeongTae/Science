@@ -144,18 +144,6 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type AtomOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "Number_ASC"
-  | "Number_DESC"
-  | "Name_ASC"
-  | "Name_DESC"
-  | "locationX_ASC"
-  | "locationX_DESC"
-  | "locationY_ASC"
-  | "locationY_DESC";
-
 export type DescriptionOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -170,92 +158,24 @@ export type DescriptionOrderByInput =
   | "Author_ASC"
   | "Author_DESC";
 
+export type AtomOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "Number_ASC"
+  | "Number_DESC"
+  | "Name_ASC"
+  | "Name_DESC"
+  | "locationX_ASC"
+  | "locationX_DESC"
+  | "locationY_ASC"
+  | "locationY_DESC";
+
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type AtomWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   Number?: Maybe<String>;
   Name?: Maybe<String>;
-}>;
-
-export interface AtomWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  Number?: Maybe<String>;
-  Number_not?: Maybe<String>;
-  Number_in?: Maybe<String[] | String>;
-  Number_not_in?: Maybe<String[] | String>;
-  Number_lt?: Maybe<String>;
-  Number_lte?: Maybe<String>;
-  Number_gt?: Maybe<String>;
-  Number_gte?: Maybe<String>;
-  Number_contains?: Maybe<String>;
-  Number_not_contains?: Maybe<String>;
-  Number_starts_with?: Maybe<String>;
-  Number_not_starts_with?: Maybe<String>;
-  Number_ends_with?: Maybe<String>;
-  Number_not_ends_with?: Maybe<String>;
-  Name?: Maybe<String>;
-  Name_not?: Maybe<String>;
-  Name_in?: Maybe<String[] | String>;
-  Name_not_in?: Maybe<String[] | String>;
-  Name_lt?: Maybe<String>;
-  Name_lte?: Maybe<String>;
-  Name_gt?: Maybe<String>;
-  Name_gte?: Maybe<String>;
-  Name_contains?: Maybe<String>;
-  Name_not_contains?: Maybe<String>;
-  Name_starts_with?: Maybe<String>;
-  Name_not_starts_with?: Maybe<String>;
-  Name_ends_with?: Maybe<String>;
-  Name_not_ends_with?: Maybe<String>;
-  locationX?: Maybe<String>;
-  locationX_not?: Maybe<String>;
-  locationX_in?: Maybe<String[] | String>;
-  locationX_not_in?: Maybe<String[] | String>;
-  locationX_lt?: Maybe<String>;
-  locationX_lte?: Maybe<String>;
-  locationX_gt?: Maybe<String>;
-  locationX_gte?: Maybe<String>;
-  locationX_contains?: Maybe<String>;
-  locationX_not_contains?: Maybe<String>;
-  locationX_starts_with?: Maybe<String>;
-  locationX_not_starts_with?: Maybe<String>;
-  locationX_ends_with?: Maybe<String>;
-  locationX_not_ends_with?: Maybe<String>;
-  locationY?: Maybe<String>;
-  locationY_not?: Maybe<String>;
-  locationY_in?: Maybe<String[] | String>;
-  locationY_not_in?: Maybe<String[] | String>;
-  locationY_lt?: Maybe<String>;
-  locationY_lte?: Maybe<String>;
-  locationY_gt?: Maybe<String>;
-  locationY_gte?: Maybe<String>;
-  locationY_contains?: Maybe<String>;
-  locationY_not_contains?: Maybe<String>;
-  locationY_starts_with?: Maybe<String>;
-  locationY_not_starts_with?: Maybe<String>;
-  locationY_ends_with?: Maybe<String>;
-  locationY_not_ends_with?: Maybe<String>;
-  AND?: Maybe<AtomWhereInput[] | AtomWhereInput>;
-  OR?: Maybe<AtomWhereInput[] | AtomWhereInput>;
-  NOT?: Maybe<AtomWhereInput[] | AtomWhereInput>;
-}
-
-export type DescriptionWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
 }>;
 
 export interface DescriptionWhereInput {
@@ -348,12 +268,110 @@ export interface DescriptionWhereInput {
   NOT?: Maybe<DescriptionWhereInput[] | DescriptionWhereInput>;
 }
 
+export interface AtomWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  Number?: Maybe<String>;
+  Number_not?: Maybe<String>;
+  Number_in?: Maybe<String[] | String>;
+  Number_not_in?: Maybe<String[] | String>;
+  Number_lt?: Maybe<String>;
+  Number_lte?: Maybe<String>;
+  Number_gt?: Maybe<String>;
+  Number_gte?: Maybe<String>;
+  Number_contains?: Maybe<String>;
+  Number_not_contains?: Maybe<String>;
+  Number_starts_with?: Maybe<String>;
+  Number_not_starts_with?: Maybe<String>;
+  Number_ends_with?: Maybe<String>;
+  Number_not_ends_with?: Maybe<String>;
+  Name?: Maybe<String>;
+  Name_not?: Maybe<String>;
+  Name_in?: Maybe<String[] | String>;
+  Name_not_in?: Maybe<String[] | String>;
+  Name_lt?: Maybe<String>;
+  Name_lte?: Maybe<String>;
+  Name_gt?: Maybe<String>;
+  Name_gte?: Maybe<String>;
+  Name_contains?: Maybe<String>;
+  Name_not_contains?: Maybe<String>;
+  Name_starts_with?: Maybe<String>;
+  Name_not_starts_with?: Maybe<String>;
+  Name_ends_with?: Maybe<String>;
+  Name_not_ends_with?: Maybe<String>;
+  locationX?: Maybe<String>;
+  locationX_not?: Maybe<String>;
+  locationX_in?: Maybe<String[] | String>;
+  locationX_not_in?: Maybe<String[] | String>;
+  locationX_lt?: Maybe<String>;
+  locationX_lte?: Maybe<String>;
+  locationX_gt?: Maybe<String>;
+  locationX_gte?: Maybe<String>;
+  locationX_contains?: Maybe<String>;
+  locationX_not_contains?: Maybe<String>;
+  locationX_starts_with?: Maybe<String>;
+  locationX_not_starts_with?: Maybe<String>;
+  locationX_ends_with?: Maybe<String>;
+  locationX_not_ends_with?: Maybe<String>;
+  locationY?: Maybe<String>;
+  locationY_not?: Maybe<String>;
+  locationY_in?: Maybe<String[] | String>;
+  locationY_not_in?: Maybe<String[] | String>;
+  locationY_lt?: Maybe<String>;
+  locationY_lte?: Maybe<String>;
+  locationY_gt?: Maybe<String>;
+  locationY_gte?: Maybe<String>;
+  locationY_contains?: Maybe<String>;
+  locationY_not_contains?: Maybe<String>;
+  locationY_starts_with?: Maybe<String>;
+  locationY_not_starts_with?: Maybe<String>;
+  locationY_ends_with?: Maybe<String>;
+  locationY_not_ends_with?: Maybe<String>;
+  descriptions_every?: Maybe<DescriptionWhereInput>;
+  descriptions_some?: Maybe<DescriptionWhereInput>;
+  descriptions_none?: Maybe<DescriptionWhereInput>;
+  AND?: Maybe<AtomWhereInput[] | AtomWhereInput>;
+  OR?: Maybe<AtomWhereInput[] | AtomWhereInput>;
+  NOT?: Maybe<AtomWhereInput[] | AtomWhereInput>;
+}
+
+export type DescriptionWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export interface AtomCreateInput {
   id?: Maybe<ID_Input>;
   Number: String;
   Name: String;
   locationX: String;
   locationY: String;
+  descriptions?: Maybe<DescriptionCreateManyInput>;
+}
+
+export interface DescriptionCreateManyInput {
+  create?: Maybe<DescriptionCreateInput[] | DescriptionCreateInput>;
+  connect?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+}
+
+export interface DescriptionCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  Subtitle: String;
+  Text: String;
+  From: String;
+  Author: String;
 }
 
 export interface AtomUpdateInput {
@@ -361,6 +379,154 @@ export interface AtomUpdateInput {
   Name?: Maybe<String>;
   locationX?: Maybe<String>;
   locationY?: Maybe<String>;
+  descriptions?: Maybe<DescriptionUpdateManyInput>;
+}
+
+export interface DescriptionUpdateManyInput {
+  create?: Maybe<DescriptionCreateInput[] | DescriptionCreateInput>;
+  update?: Maybe<
+    | DescriptionUpdateWithWhereUniqueNestedInput[]
+    | DescriptionUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | DescriptionUpsertWithWhereUniqueNestedInput[]
+    | DescriptionUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+  connect?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+  set?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+  disconnect?: Maybe<
+    DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput
+  >;
+  deleteMany?: Maybe<
+    DescriptionScalarWhereInput[] | DescriptionScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | DescriptionUpdateManyWithWhereNestedInput[]
+    | DescriptionUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface DescriptionUpdateWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput;
+  data: DescriptionUpdateDataInput;
+}
+
+export interface DescriptionUpdateDataInput {
+  name?: Maybe<String>;
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+  From?: Maybe<String>;
+  Author?: Maybe<String>;
+}
+
+export interface DescriptionUpsertWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput;
+  update: DescriptionUpdateDataInput;
+  create: DescriptionCreateInput;
+}
+
+export interface DescriptionScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  Subtitle?: Maybe<String>;
+  Subtitle_not?: Maybe<String>;
+  Subtitle_in?: Maybe<String[] | String>;
+  Subtitle_not_in?: Maybe<String[] | String>;
+  Subtitle_lt?: Maybe<String>;
+  Subtitle_lte?: Maybe<String>;
+  Subtitle_gt?: Maybe<String>;
+  Subtitle_gte?: Maybe<String>;
+  Subtitle_contains?: Maybe<String>;
+  Subtitle_not_contains?: Maybe<String>;
+  Subtitle_starts_with?: Maybe<String>;
+  Subtitle_not_starts_with?: Maybe<String>;
+  Subtitle_ends_with?: Maybe<String>;
+  Subtitle_not_ends_with?: Maybe<String>;
+  Text?: Maybe<String>;
+  Text_not?: Maybe<String>;
+  Text_in?: Maybe<String[] | String>;
+  Text_not_in?: Maybe<String[] | String>;
+  Text_lt?: Maybe<String>;
+  Text_lte?: Maybe<String>;
+  Text_gt?: Maybe<String>;
+  Text_gte?: Maybe<String>;
+  Text_contains?: Maybe<String>;
+  Text_not_contains?: Maybe<String>;
+  Text_starts_with?: Maybe<String>;
+  Text_not_starts_with?: Maybe<String>;
+  Text_ends_with?: Maybe<String>;
+  Text_not_ends_with?: Maybe<String>;
+  From?: Maybe<String>;
+  From_not?: Maybe<String>;
+  From_in?: Maybe<String[] | String>;
+  From_not_in?: Maybe<String[] | String>;
+  From_lt?: Maybe<String>;
+  From_lte?: Maybe<String>;
+  From_gt?: Maybe<String>;
+  From_gte?: Maybe<String>;
+  From_contains?: Maybe<String>;
+  From_not_contains?: Maybe<String>;
+  From_starts_with?: Maybe<String>;
+  From_not_starts_with?: Maybe<String>;
+  From_ends_with?: Maybe<String>;
+  From_not_ends_with?: Maybe<String>;
+  Author?: Maybe<String>;
+  Author_not?: Maybe<String>;
+  Author_in?: Maybe<String[] | String>;
+  Author_not_in?: Maybe<String[] | String>;
+  Author_lt?: Maybe<String>;
+  Author_lte?: Maybe<String>;
+  Author_gt?: Maybe<String>;
+  Author_gte?: Maybe<String>;
+  Author_contains?: Maybe<String>;
+  Author_not_contains?: Maybe<String>;
+  Author_starts_with?: Maybe<String>;
+  Author_not_starts_with?: Maybe<String>;
+  Author_ends_with?: Maybe<String>;
+  Author_not_ends_with?: Maybe<String>;
+  AND?: Maybe<DescriptionScalarWhereInput[] | DescriptionScalarWhereInput>;
+  OR?: Maybe<DescriptionScalarWhereInput[] | DescriptionScalarWhereInput>;
+  NOT?: Maybe<DescriptionScalarWhereInput[] | DescriptionScalarWhereInput>;
+}
+
+export interface DescriptionUpdateManyWithWhereNestedInput {
+  where: DescriptionScalarWhereInput;
+  data: DescriptionUpdateManyDataInput;
+}
+
+export interface DescriptionUpdateManyDataInput {
+  name?: Maybe<String>;
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+  From?: Maybe<String>;
+  Author?: Maybe<String>;
 }
 
 export interface AtomUpdateManyMutationInput {
@@ -368,15 +534,6 @@ export interface AtomUpdateManyMutationInput {
   Name?: Maybe<String>;
   locationX?: Maybe<String>;
   locationY?: Maybe<String>;
-}
-
-export interface DescriptionCreateInput {
-  id?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  Subtitle?: Maybe<String>;
-  Text?: Maybe<String>;
-  From?: Maybe<String>;
-  Author?: Maybe<String>;
 }
 
 export interface DescriptionUpdateInput {
@@ -441,6 +598,15 @@ export interface AtomPromise extends Promise<Atom>, Fragmentable {
   Name: () => Promise<String>;
   locationX: () => Promise<String>;
   locationY: () => Promise<String>;
+  descriptions: <T = FragmentableArray<Description>>(args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface AtomSubscription
@@ -451,6 +617,15 @@ export interface AtomSubscription
   Name: () => Promise<AsyncIterator<String>>;
   locationX: () => Promise<AsyncIterator<String>>;
   locationY: () => Promise<AsyncIterator<String>>;
+  descriptions: <T = Promise<AsyncIterator<DescriptionSubscription>>>(args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface AtomNullablePromise
@@ -461,6 +636,55 @@ export interface AtomNullablePromise
   Name: () => Promise<String>;
   locationX: () => Promise<String>;
   locationY: () => Promise<String>;
+  descriptions: <T = FragmentableArray<Description>>(args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface Description {
+  id: ID_Output;
+  name: String;
+  Subtitle: String;
+  Text: String;
+  From: String;
+  Author: String;
+}
+
+export interface DescriptionPromise extends Promise<Description>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  Subtitle: () => Promise<String>;
+  Text: () => Promise<String>;
+  From: () => Promise<String>;
+  Author: () => Promise<String>;
+}
+
+export interface DescriptionSubscription
+  extends Promise<AsyncIterator<Description>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  Subtitle: () => Promise<AsyncIterator<String>>;
+  Text: () => Promise<AsyncIterator<String>>;
+  From: () => Promise<AsyncIterator<String>>;
+  Author: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DescriptionNullablePromise
+  extends Promise<Description | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  Subtitle: () => Promise<String>;
+  Text: () => Promise<String>;
+  From: () => Promise<String>;
+  Author: () => Promise<String>;
 }
 
 export interface AtomConnection {
@@ -538,46 +762,6 @@ export interface AggregateAtomSubscription
   extends Promise<AsyncIterator<AggregateAtom>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Description {
-  id: ID_Output;
-  name?: String;
-  Subtitle?: String;
-  Text?: String;
-  From?: String;
-  Author?: String;
-}
-
-export interface DescriptionPromise extends Promise<Description>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  Subtitle: () => Promise<String>;
-  Text: () => Promise<String>;
-  From: () => Promise<String>;
-  Author: () => Promise<String>;
-}
-
-export interface DescriptionSubscription
-  extends Promise<AsyncIterator<Description>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  Subtitle: () => Promise<AsyncIterator<String>>;
-  Text: () => Promise<AsyncIterator<String>>;
-  From: () => Promise<AsyncIterator<String>>;
-  Author: () => Promise<AsyncIterator<String>>;
-}
-
-export interface DescriptionNullablePromise
-  extends Promise<Description | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  Subtitle: () => Promise<String>;
-  Text: () => Promise<String>;
-  From: () => Promise<String>;
-  Author: () => Promise<String>;
 }
 
 export interface DescriptionConnection {
@@ -732,11 +916,11 @@ export interface DescriptionSubscriptionPayloadSubscription
 
 export interface DescriptionPreviousValues {
   id: ID_Output;
-  name?: String;
-  Subtitle?: String;
-  Text?: String;
-  From?: String;
-  Author?: String;
+  name: String;
+  Subtitle: String;
+  Text: String;
+  From: String;
+  Author: String;
 }
 
 export interface DescriptionPreviousValuesPromise

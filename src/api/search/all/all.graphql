@@ -1,0 +1,4 @@
+type Query{
+    atoms:[Atom],
+    descriptions:[Description]
+}
