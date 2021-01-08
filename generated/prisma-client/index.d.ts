@@ -16,7 +16,8 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  user: (where?: UserWhereInput) => Promise<boolean>;
+  atom: (where?: AtomWhereInput) => Promise<boolean>;
+  description: (where?: DescriptionWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -38,47 +39,86 @@ export interface Prisma {
    * Queries
    */
 
-  user: (where: UserWhereUniqueInput) => UserNullablePromise;
-  users: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
+  atom: (where: AtomWhereUniqueInput) => AtomNullablePromise;
+  atoms: (args?: {
+    where?: AtomWhereInput;
+    orderBy?: AtomOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<User>;
-  usersConnection: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
+  }) => FragmentableArray<Atom>;
+  atomsConnection: (args?: {
+    where?: AtomWhereInput;
+    orderBy?: AtomOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => UserConnectionPromise;
+  }) => AtomConnectionPromise;
+  description: (
+    where: DescriptionWhereUniqueInput
+  ) => DescriptionNullablePromise;
+  descriptions: (args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Description>;
+  descriptionsConnection: (args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => DescriptionConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
-  createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (args: {
-    data: UserUpdateInput;
-    where: UserWhereUniqueInput;
-  }) => UserPromise;
-  updateManyUsers: (args: {
-    data: UserUpdateManyMutationInput;
-    where?: UserWhereInput;
+  createAtom: (data: AtomCreateInput) => AtomPromise;
+  updateAtom: (args: {
+    data: AtomUpdateInput;
+    where: AtomWhereUniqueInput;
+  }) => AtomPromise;
+  updateManyAtoms: (args: {
+    data: AtomUpdateManyMutationInput;
+    where?: AtomWhereInput;
   }) => BatchPayloadPromise;
-  upsertUser: (args: {
-    where: UserWhereUniqueInput;
-    create: UserCreateInput;
-    update: UserUpdateInput;
-  }) => UserPromise;
-  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
-  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
+  upsertAtom: (args: {
+    where: AtomWhereUniqueInput;
+    create: AtomCreateInput;
+    update: AtomUpdateInput;
+  }) => AtomPromise;
+  deleteAtom: (where: AtomWhereUniqueInput) => AtomPromise;
+  deleteManyAtoms: (where?: AtomWhereInput) => BatchPayloadPromise;
+  createDescription: (data: DescriptionCreateInput) => DescriptionPromise;
+  updateDescription: (args: {
+    data: DescriptionUpdateInput;
+    where: DescriptionWhereUniqueInput;
+  }) => DescriptionPromise;
+  updateManyDescriptions: (args: {
+    data: DescriptionUpdateManyMutationInput;
+    where?: DescriptionWhereInput;
+  }) => BatchPayloadPromise;
+  upsertDescription: (args: {
+    where: DescriptionWhereUniqueInput;
+    create: DescriptionCreateInput;
+    update: DescriptionUpdateInput;
+  }) => DescriptionPromise;
+  deleteDescription: (where: DescriptionWhereUniqueInput) => DescriptionPromise;
+  deleteManyDescriptions: (
+    where?: DescriptionWhereInput
+  ) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -88,9 +128,12 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  user: (
-    where?: UserSubscriptionWhereInput
-  ) => UserSubscriptionPayloadSubscription;
+  atom: (
+    where?: AtomSubscriptionWhereInput
+  ) => AtomSubscriptionPayloadSubscription;
+  description: (
+    where?: DescriptionSubscriptionWhereInput
+  ) => DescriptionSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -101,15 +144,39 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type UserOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
+export type DescriptionOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "Subtitle_ASC"
+  | "Subtitle_DESC"
+  | "Text_ASC"
+  | "Text_DESC"
+  | "From_ASC"
+  | "From_DESC"
+  | "Author_ASC"
+  | "Author_DESC";
+
+export type AtomOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "Number_ASC"
+  | "Number_DESC"
+  | "Name_ASC"
+  | "Name_DESC"
+  | "locationX_ASC"
+  | "locationX_DESC"
+  | "locationY_ASC"
+  | "locationY_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type UserWhereUniqueInput = AtLeastOne<{
+export type AtomWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  Number?: Maybe<String>;
+  Name?: Maybe<String>;
 }>;
 
-export interface UserWhereInput {
+export interface DescriptionWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -124,96 +191,484 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+  Subtitle?: Maybe<String>;
+  Subtitle_not?: Maybe<String>;
+  Subtitle_in?: Maybe<String[] | String>;
+  Subtitle_not_in?: Maybe<String[] | String>;
+  Subtitle_lt?: Maybe<String>;
+  Subtitle_lte?: Maybe<String>;
+  Subtitle_gt?: Maybe<String>;
+  Subtitle_gte?: Maybe<String>;
+  Subtitle_contains?: Maybe<String>;
+  Subtitle_not_contains?: Maybe<String>;
+  Subtitle_starts_with?: Maybe<String>;
+  Subtitle_not_starts_with?: Maybe<String>;
+  Subtitle_ends_with?: Maybe<String>;
+  Subtitle_not_ends_with?: Maybe<String>;
+  Text?: Maybe<String>;
+  Text_not?: Maybe<String>;
+  Text_in?: Maybe<String[] | String>;
+  Text_not_in?: Maybe<String[] | String>;
+  Text_lt?: Maybe<String>;
+  Text_lte?: Maybe<String>;
+  Text_gt?: Maybe<String>;
+  Text_gte?: Maybe<String>;
+  Text_contains?: Maybe<String>;
+  Text_not_contains?: Maybe<String>;
+  Text_starts_with?: Maybe<String>;
+  Text_not_starts_with?: Maybe<String>;
+  Text_ends_with?: Maybe<String>;
+  Text_not_ends_with?: Maybe<String>;
+  From?: Maybe<String>;
+  From_not?: Maybe<String>;
+  From_in?: Maybe<String[] | String>;
+  From_not_in?: Maybe<String[] | String>;
+  From_lt?: Maybe<String>;
+  From_lte?: Maybe<String>;
+  From_gt?: Maybe<String>;
+  From_gte?: Maybe<String>;
+  From_contains?: Maybe<String>;
+  From_not_contains?: Maybe<String>;
+  From_starts_with?: Maybe<String>;
+  From_not_starts_with?: Maybe<String>;
+  From_ends_with?: Maybe<String>;
+  From_not_ends_with?: Maybe<String>;
+  Author?: Maybe<String>;
+  Author_not?: Maybe<String>;
+  Author_in?: Maybe<String[] | String>;
+  Author_not_in?: Maybe<String[] | String>;
+  Author_lt?: Maybe<String>;
+  Author_lte?: Maybe<String>;
+  Author_gt?: Maybe<String>;
+  Author_gte?: Maybe<String>;
+  Author_contains?: Maybe<String>;
+  Author_not_contains?: Maybe<String>;
+  Author_starts_with?: Maybe<String>;
+  Author_not_starts_with?: Maybe<String>;
+  Author_ends_with?: Maybe<String>;
+  Author_not_ends_with?: Maybe<String>;
+  AND?: Maybe<DescriptionWhereInput[] | DescriptionWhereInput>;
+  OR?: Maybe<DescriptionWhereInput[] | DescriptionWhereInput>;
+  NOT?: Maybe<DescriptionWhereInput[] | DescriptionWhereInput>;
 }
 
-export interface UserCreateInput {
+export interface AtomWhereInput {
   id?: Maybe<ID_Input>;
-  name: String;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  Number?: Maybe<String>;
+  Number_not?: Maybe<String>;
+  Number_in?: Maybe<String[] | String>;
+  Number_not_in?: Maybe<String[] | String>;
+  Number_lt?: Maybe<String>;
+  Number_lte?: Maybe<String>;
+  Number_gt?: Maybe<String>;
+  Number_gte?: Maybe<String>;
+  Number_contains?: Maybe<String>;
+  Number_not_contains?: Maybe<String>;
+  Number_starts_with?: Maybe<String>;
+  Number_not_starts_with?: Maybe<String>;
+  Number_ends_with?: Maybe<String>;
+  Number_not_ends_with?: Maybe<String>;
+  Name?: Maybe<String>;
+  Name_not?: Maybe<String>;
+  Name_in?: Maybe<String[] | String>;
+  Name_not_in?: Maybe<String[] | String>;
+  Name_lt?: Maybe<String>;
+  Name_lte?: Maybe<String>;
+  Name_gt?: Maybe<String>;
+  Name_gte?: Maybe<String>;
+  Name_contains?: Maybe<String>;
+  Name_not_contains?: Maybe<String>;
+  Name_starts_with?: Maybe<String>;
+  Name_not_starts_with?: Maybe<String>;
+  Name_ends_with?: Maybe<String>;
+  Name_not_ends_with?: Maybe<String>;
+  locationX?: Maybe<String>;
+  locationX_not?: Maybe<String>;
+  locationX_in?: Maybe<String[] | String>;
+  locationX_not_in?: Maybe<String[] | String>;
+  locationX_lt?: Maybe<String>;
+  locationX_lte?: Maybe<String>;
+  locationX_gt?: Maybe<String>;
+  locationX_gte?: Maybe<String>;
+  locationX_contains?: Maybe<String>;
+  locationX_not_contains?: Maybe<String>;
+  locationX_starts_with?: Maybe<String>;
+  locationX_not_starts_with?: Maybe<String>;
+  locationX_ends_with?: Maybe<String>;
+  locationX_not_ends_with?: Maybe<String>;
+  locationY?: Maybe<String>;
+  locationY_not?: Maybe<String>;
+  locationY_in?: Maybe<String[] | String>;
+  locationY_not_in?: Maybe<String[] | String>;
+  locationY_lt?: Maybe<String>;
+  locationY_lte?: Maybe<String>;
+  locationY_gt?: Maybe<String>;
+  locationY_gte?: Maybe<String>;
+  locationY_contains?: Maybe<String>;
+  locationY_not_contains?: Maybe<String>;
+  locationY_starts_with?: Maybe<String>;
+  locationY_not_starts_with?: Maybe<String>;
+  locationY_ends_with?: Maybe<String>;
+  locationY_not_ends_with?: Maybe<String>;
+  descriptions_every?: Maybe<DescriptionWhereInput>;
+  descriptions_some?: Maybe<DescriptionWhereInput>;
+  descriptions_none?: Maybe<DescriptionWhereInput>;
+  AND?: Maybe<AtomWhereInput[] | AtomWhereInput>;
+  OR?: Maybe<AtomWhereInput[] | AtomWhereInput>;
+  NOT?: Maybe<AtomWhereInput[] | AtomWhereInput>;
 }
 
-export interface UserUpdateInput {
-  name?: Maybe<String>;
+export type DescriptionWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+}>;
+
+export interface AtomCreateInput {
+  id?: Maybe<ID_Input>;
+  Number: String;
+  Name: String;
+  locationX: String;
+  locationY: String;
+  descriptions?: Maybe<DescriptionCreateManyInput>;
 }
 
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
+export interface DescriptionCreateManyInput {
+  create?: Maybe<DescriptionCreateInput[] | DescriptionCreateInput>;
+  connect?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
 }
 
-export interface UserSubscriptionWhereInput {
+export interface DescriptionCreateInput {
+  id?: Maybe<ID_Input>;
+  Subtitle: String;
+  Text: String;
+  From: String;
+  Author?: Maybe<String>;
+}
+
+export interface AtomUpdateInput {
+  Number?: Maybe<String>;
+  Name?: Maybe<String>;
+  locationX?: Maybe<String>;
+  locationY?: Maybe<String>;
+  descriptions?: Maybe<DescriptionUpdateManyInput>;
+}
+
+export interface DescriptionUpdateManyInput {
+  create?: Maybe<DescriptionCreateInput[] | DescriptionCreateInput>;
+  update?: Maybe<
+    | DescriptionUpdateWithWhereUniqueNestedInput[]
+    | DescriptionUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | DescriptionUpsertWithWhereUniqueNestedInput[]
+    | DescriptionUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+  connect?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+  set?: Maybe<DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput>;
+  disconnect?: Maybe<
+    DescriptionWhereUniqueInput[] | DescriptionWhereUniqueInput
+  >;
+  deleteMany?: Maybe<
+    DescriptionScalarWhereInput[] | DescriptionScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | DescriptionUpdateManyWithWhereNestedInput[]
+    | DescriptionUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface DescriptionUpdateWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput;
+  data: DescriptionUpdateDataInput;
+}
+
+export interface DescriptionUpdateDataInput {
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+  From?: Maybe<String>;
+  Author?: Maybe<String>;
+}
+
+export interface DescriptionUpsertWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput;
+  update: DescriptionUpdateDataInput;
+  create: DescriptionCreateInput;
+}
+
+export interface DescriptionScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  Subtitle?: Maybe<String>;
+  Subtitle_not?: Maybe<String>;
+  Subtitle_in?: Maybe<String[] | String>;
+  Subtitle_not_in?: Maybe<String[] | String>;
+  Subtitle_lt?: Maybe<String>;
+  Subtitle_lte?: Maybe<String>;
+  Subtitle_gt?: Maybe<String>;
+  Subtitle_gte?: Maybe<String>;
+  Subtitle_contains?: Maybe<String>;
+  Subtitle_not_contains?: Maybe<String>;
+  Subtitle_starts_with?: Maybe<String>;
+  Subtitle_not_starts_with?: Maybe<String>;
+  Subtitle_ends_with?: Maybe<String>;
+  Subtitle_not_ends_with?: Maybe<String>;
+  Text?: Maybe<String>;
+  Text_not?: Maybe<String>;
+  Text_in?: Maybe<String[] | String>;
+  Text_not_in?: Maybe<String[] | String>;
+  Text_lt?: Maybe<String>;
+  Text_lte?: Maybe<String>;
+  Text_gt?: Maybe<String>;
+  Text_gte?: Maybe<String>;
+  Text_contains?: Maybe<String>;
+  Text_not_contains?: Maybe<String>;
+  Text_starts_with?: Maybe<String>;
+  Text_not_starts_with?: Maybe<String>;
+  Text_ends_with?: Maybe<String>;
+  Text_not_ends_with?: Maybe<String>;
+  From?: Maybe<String>;
+  From_not?: Maybe<String>;
+  From_in?: Maybe<String[] | String>;
+  From_not_in?: Maybe<String[] | String>;
+  From_lt?: Maybe<String>;
+  From_lte?: Maybe<String>;
+  From_gt?: Maybe<String>;
+  From_gte?: Maybe<String>;
+  From_contains?: Maybe<String>;
+  From_not_contains?: Maybe<String>;
+  From_starts_with?: Maybe<String>;
+  From_not_starts_with?: Maybe<String>;
+  From_ends_with?: Maybe<String>;
+  From_not_ends_with?: Maybe<String>;
+  Author?: Maybe<String>;
+  Author_not?: Maybe<String>;
+  Author_in?: Maybe<String[] | String>;
+  Author_not_in?: Maybe<String[] | String>;
+  Author_lt?: Maybe<String>;
+  Author_lte?: Maybe<String>;
+  Author_gt?: Maybe<String>;
+  Author_gte?: Maybe<String>;
+  Author_contains?: Maybe<String>;
+  Author_not_contains?: Maybe<String>;
+  Author_starts_with?: Maybe<String>;
+  Author_not_starts_with?: Maybe<String>;
+  Author_ends_with?: Maybe<String>;
+  Author_not_ends_with?: Maybe<String>;
+  AND?: Maybe<DescriptionScalarWhereInput[] | DescriptionScalarWhereInput>;
+  OR?: Maybe<DescriptionScalarWhereInput[] | DescriptionScalarWhereInput>;
+  NOT?: Maybe<DescriptionScalarWhereInput[] | DescriptionScalarWhereInput>;
+}
+
+export interface DescriptionUpdateManyWithWhereNestedInput {
+  where: DescriptionScalarWhereInput;
+  data: DescriptionUpdateManyDataInput;
+}
+
+export interface DescriptionUpdateManyDataInput {
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+  From?: Maybe<String>;
+  Author?: Maybe<String>;
+}
+
+export interface AtomUpdateManyMutationInput {
+  Number?: Maybe<String>;
+  Name?: Maybe<String>;
+  locationX?: Maybe<String>;
+  locationY?: Maybe<String>;
+}
+
+export interface DescriptionUpdateInput {
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+  From?: Maybe<String>;
+  Author?: Maybe<String>;
+}
+
+export interface DescriptionUpdateManyMutationInput {
+  Subtitle?: Maybe<String>;
+  Text?: Maybe<String>;
+  From?: Maybe<String>;
+  Author?: Maybe<String>;
+}
+
+export interface AtomSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  node?: Maybe<AtomWhereInput>;
+  AND?: Maybe<AtomSubscriptionWhereInput[] | AtomSubscriptionWhereInput>;
+  OR?: Maybe<AtomSubscriptionWhereInput[] | AtomSubscriptionWhereInput>;
+  NOT?: Maybe<AtomSubscriptionWhereInput[] | AtomSubscriptionWhereInput>;
+}
+
+export interface DescriptionSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<DescriptionWhereInput>;
+  AND?: Maybe<
+    DescriptionSubscriptionWhereInput[] | DescriptionSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    DescriptionSubscriptionWhereInput[] | DescriptionSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    DescriptionSubscriptionWhereInput[] | DescriptionSubscriptionWhereInput
+  >;
 }
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface User {
+export interface Atom {
   id: ID_Output;
-  name: String;
+  Number: String;
+  Name: String;
+  locationX: String;
+  locationY: String;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
+export interface AtomPromise extends Promise<Atom>, Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  Number: () => Promise<String>;
+  Name: () => Promise<String>;
+  locationX: () => Promise<String>;
+  locationY: () => Promise<String>;
+  descriptions: <T = FragmentableArray<Description>>(args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface AtomSubscription
+  extends Promise<AsyncIterator<Atom>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  Number: () => Promise<AsyncIterator<String>>;
+  Name: () => Promise<AsyncIterator<String>>;
+  locationX: () => Promise<AsyncIterator<String>>;
+  locationY: () => Promise<AsyncIterator<String>>;
+  descriptions: <T = Promise<AsyncIterator<DescriptionSubscription>>>(args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface AtomNullablePromise
+  extends Promise<Atom | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  Number: () => Promise<String>;
+  Name: () => Promise<String>;
+  locationX: () => Promise<String>;
+  locationY: () => Promise<String>;
+  descriptions: <T = FragmentableArray<Description>>(args?: {
+    where?: DescriptionWhereInput;
+    orderBy?: DescriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserConnection {
+export interface Description {
+  id: ID_Output;
+  Subtitle: String;
+  Text: String;
+  From: String;
+  Author?: String;
+}
+
+export interface DescriptionPromise extends Promise<Description>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  Subtitle: () => Promise<String>;
+  Text: () => Promise<String>;
+  From: () => Promise<String>;
+  Author: () => Promise<String>;
+}
+
+export interface DescriptionSubscription
+  extends Promise<AsyncIterator<Description>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  Subtitle: () => Promise<AsyncIterator<String>>;
+  Text: () => Promise<AsyncIterator<String>>;
+  From: () => Promise<AsyncIterator<String>>;
+  Author: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DescriptionNullablePromise
+  extends Promise<Description | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  Subtitle: () => Promise<String>;
+  Text: () => Promise<String>;
+  From: () => Promise<String>;
+  Author: () => Promise<String>;
+}
+
+export interface AtomConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: AtomEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface AtomConnectionPromise
+  extends Promise<AtomConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<AtomEdge>>() => T;
+  aggregate: <T = AggregateAtomPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface AtomConnectionSubscription
+  extends Promise<AsyncIterator<AtomConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AtomEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAtomSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -239,35 +694,91 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserEdge {
-  node: User;
+export interface AtomEdge {
+  node: Atom;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface AtomEdgePromise extends Promise<AtomEdge>, Fragmentable {
+  node: <T = AtomPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface AtomEdgeSubscription
+  extends Promise<AsyncIterator<AtomEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = AtomSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateUser {
+export interface AggregateAtom {
   count: Int;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface AggregateAtomPromise
+  extends Promise<AggregateAtom>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface AggregateAtomSubscription
+  extends Promise<AsyncIterator<AggregateAtom>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface DescriptionConnection {
+  pageInfo: PageInfo;
+  edges: DescriptionEdge[];
+}
+
+export interface DescriptionConnectionPromise
+  extends Promise<DescriptionConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DescriptionEdge>>() => T;
+  aggregate: <T = AggregateDescriptionPromise>() => T;
+}
+
+export interface DescriptionConnectionSubscription
+  extends Promise<AsyncIterator<DescriptionConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DescriptionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDescriptionSubscription>() => T;
+}
+
+export interface DescriptionEdge {
+  node: Description;
+  cursor: String;
+}
+
+export interface DescriptionEdgePromise
+  extends Promise<DescriptionEdge>,
+    Fragmentable {
+  node: <T = DescriptionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface DescriptionEdgeSubscription
+  extends Promise<AsyncIterator<DescriptionEdge>>,
+    Fragmentable {
+  node: <T = DescriptionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateDescription {
+  count: Int;
+}
+
+export interface AggregateDescriptionPromise
+  extends Promise<AggregateDescription>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateDescriptionSubscription
+  extends Promise<AsyncIterator<AggregateDescription>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -288,48 +799,110 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface UserSubscriptionPayload {
+export interface AtomSubscriptionPayload {
   mutation: MutationType;
-  node: User;
+  node: Atom;
   updatedFields: String[];
-  previousValues: UserPreviousValues;
+  previousValues: AtomPreviousValues;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface AtomSubscriptionPayloadPromise
+  extends Promise<AtomSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
+  node: <T = AtomPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  previousValues: <T = AtomPreviousValuesPromise>() => T;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface AtomSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AtomSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
+  node: <T = AtomSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  previousValues: <T = AtomPreviousValuesSubscription>() => T;
 }
 
-export interface UserPreviousValues {
+export interface AtomPreviousValues {
   id: ID_Output;
-  name: String;
+  Number: String;
+  Name: String;
+  locationX: String;
+  locationY: String;
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
+export interface AtomPreviousValuesPromise
+  extends Promise<AtomPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  Number: () => Promise<String>;
+  Name: () => Promise<String>;
+  locationX: () => Promise<String>;
+  locationY: () => Promise<String>;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface AtomPreviousValuesSubscription
+  extends Promise<AsyncIterator<AtomPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  Number: () => Promise<AsyncIterator<String>>;
+  Name: () => Promise<AsyncIterator<String>>;
+  locationX: () => Promise<AsyncIterator<String>>;
+  locationY: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DescriptionSubscriptionPayload {
+  mutation: MutationType;
+  node: Description;
+  updatedFields: String[];
+  previousValues: DescriptionPreviousValues;
+}
+
+export interface DescriptionSubscriptionPayloadPromise
+  extends Promise<DescriptionSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DescriptionPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DescriptionPreviousValuesPromise>() => T;
+}
+
+export interface DescriptionSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DescriptionSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DescriptionSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DescriptionPreviousValuesSubscription>() => T;
+}
+
+export interface DescriptionPreviousValues {
+  id: ID_Output;
+  Subtitle: String;
+  Text: String;
+  From: String;
+  Author?: String;
+}
+
+export interface DescriptionPreviousValuesPromise
+  extends Promise<DescriptionPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  Subtitle: () => Promise<String>;
+  Text: () => Promise<String>;
+  From: () => Promise<String>;
+  Author: () => Promise<String>;
+}
+
+export interface DescriptionPreviousValuesSubscription
+  extends Promise<AsyncIterator<DescriptionPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  Subtitle: () => Promise<AsyncIterator<String>>;
+  Text: () => Promise<AsyncIterator<String>>;
+  From: () => Promise<AsyncIterator<String>>;
+  Author: () => Promise<AsyncIterator<String>>;
 }
 
 /*
@@ -361,7 +934,11 @@ export type Long = string;
 
 export const models: Model[] = [
   {
-    name: "User",
+    name: "Atom",
+    embedded: false
+  },
+  {
+    name: "Description",
     embedded: false
   }
 ];

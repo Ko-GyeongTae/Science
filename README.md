@@ -4,12 +4,12 @@
 ## atom
  - Number 
  - Name
- - location
+ - location x, y
  - descriptions
 
 ## descriptions
  - subtitle
- - description
+ - Text
  - from
 
  

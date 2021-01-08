@@ -3,23 +3,486 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type AggregateAtom {
   count: Int!
+}
+
+type AggregateDescription {
+  count: Int!
+}
+
+type Atom {
+  id: ID!
+  Number: String!
+  Name: String!
+  locationX: String!
+  locationY: String!
+  descriptions(where: DescriptionWhereInput, orderBy: DescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Description!]
+}
+
+type AtomConnection {
+  pageInfo: PageInfo!
+  edges: [AtomEdge]!
+  aggregate: AggregateAtom!
+}
+
+input AtomCreateInput {
+  id: ID
+  Number: String!
+  Name: String!
+  locationX: String!
+  locationY: String!
+  descriptions: DescriptionCreateManyInput
+}
+
+type AtomEdge {
+  node: Atom!
+  cursor: String!
+}
+
+enum AtomOrderByInput {
+  id_ASC
+  id_DESC
+  Number_ASC
+  Number_DESC
+  Name_ASC
+  Name_DESC
+  locationX_ASC
+  locationX_DESC
+  locationY_ASC
+  locationY_DESC
+}
+
+type AtomPreviousValues {
+  id: ID!
+  Number: String!
+  Name: String!
+  locationX: String!
+  locationY: String!
+}
+
+type AtomSubscriptionPayload {
+  mutation: MutationType!
+  node: Atom
+  updatedFields: [String!]
+  previousValues: AtomPreviousValues
+}
+
+input AtomSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AtomWhereInput
+  AND: [AtomSubscriptionWhereInput!]
+  OR: [AtomSubscriptionWhereInput!]
+  NOT: [AtomSubscriptionWhereInput!]
+}
+
+input AtomUpdateInput {
+  Number: String
+  Name: String
+  locationX: String
+  locationY: String
+  descriptions: DescriptionUpdateManyInput
+}
+
+input AtomUpdateManyMutationInput {
+  Number: String
+  Name: String
+  locationX: String
+  locationY: String
+}
+
+input AtomWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  Number: String
+  Number_not: String
+  Number_in: [String!]
+  Number_not_in: [String!]
+  Number_lt: String
+  Number_lte: String
+  Number_gt: String
+  Number_gte: String
+  Number_contains: String
+  Number_not_contains: String
+  Number_starts_with: String
+  Number_not_starts_with: String
+  Number_ends_with: String
+  Number_not_ends_with: String
+  Name: String
+  Name_not: String
+  Name_in: [String!]
+  Name_not_in: [String!]
+  Name_lt: String
+  Name_lte: String
+  Name_gt: String
+  Name_gte: String
+  Name_contains: String
+  Name_not_contains: String
+  Name_starts_with: String
+  Name_not_starts_with: String
+  Name_ends_with: String
+  Name_not_ends_with: String
+  locationX: String
+  locationX_not: String
+  locationX_in: [String!]
+  locationX_not_in: [String!]
+  locationX_lt: String
+  locationX_lte: String
+  locationX_gt: String
+  locationX_gte: String
+  locationX_contains: String
+  locationX_not_contains: String
+  locationX_starts_with: String
+  locationX_not_starts_with: String
+  locationX_ends_with: String
+  locationX_not_ends_with: String
+  locationY: String
+  locationY_not: String
+  locationY_in: [String!]
+  locationY_not_in: [String!]
+  locationY_lt: String
+  locationY_lte: String
+  locationY_gt: String
+  locationY_gte: String
+  locationY_contains: String
+  locationY_not_contains: String
+  locationY_starts_with: String
+  locationY_not_starts_with: String
+  locationY_ends_with: String
+  locationY_not_ends_with: String
+  descriptions_every: DescriptionWhereInput
+  descriptions_some: DescriptionWhereInput
+  descriptions_none: DescriptionWhereInput
+  AND: [AtomWhereInput!]
+  OR: [AtomWhereInput!]
+  NOT: [AtomWhereInput!]
+}
+
+input AtomWhereUniqueInput {
+  id: ID
+  Number: String
+  Name: String
 }
 
 type BatchPayload {
   count: Long!
 }
 
+type Description {
+  id: ID!
+  Subtitle: String!
+  Text: String!
+  From: String!
+  Author: String
+}
+
+type DescriptionConnection {
+  pageInfo: PageInfo!
+  edges: [DescriptionEdge]!
+  aggregate: AggregateDescription!
+}
+
+input DescriptionCreateInput {
+  id: ID
+  Subtitle: String!
+  Text: String!
+  From: String!
+  Author: String
+}
+
+input DescriptionCreateManyInput {
+  create: [DescriptionCreateInput!]
+  connect: [DescriptionWhereUniqueInput!]
+}
+
+type DescriptionEdge {
+  node: Description!
+  cursor: String!
+}
+
+enum DescriptionOrderByInput {
+  id_ASC
+  id_DESC
+  Subtitle_ASC
+  Subtitle_DESC
+  Text_ASC
+  Text_DESC
+  From_ASC
+  From_DESC
+  Author_ASC
+  Author_DESC
+}
+
+type DescriptionPreviousValues {
+  id: ID!
+  Subtitle: String!
+  Text: String!
+  From: String!
+  Author: String
+}
+
+input DescriptionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  Subtitle: String
+  Subtitle_not: String
+  Subtitle_in: [String!]
+  Subtitle_not_in: [String!]
+  Subtitle_lt: String
+  Subtitle_lte: String
+  Subtitle_gt: String
+  Subtitle_gte: String
+  Subtitle_contains: String
+  Subtitle_not_contains: String
+  Subtitle_starts_with: String
+  Subtitle_not_starts_with: String
+  Subtitle_ends_with: String
+  Subtitle_not_ends_with: String
+  Text: String
+  Text_not: String
+  Text_in: [String!]
+  Text_not_in: [String!]
+  Text_lt: String
+  Text_lte: String
+  Text_gt: String
+  Text_gte: String
+  Text_contains: String
+  Text_not_contains: String
+  Text_starts_with: String
+  Text_not_starts_with: String
+  Text_ends_with: String
+  Text_not_ends_with: String
+  From: String
+  From_not: String
+  From_in: [String!]
+  From_not_in: [String!]
+  From_lt: String
+  From_lte: String
+  From_gt: String
+  From_gte: String
+  From_contains: String
+  From_not_contains: String
+  From_starts_with: String
+  From_not_starts_with: String
+  From_ends_with: String
+  From_not_ends_with: String
+  Author: String
+  Author_not: String
+  Author_in: [String!]
+  Author_not_in: [String!]
+  Author_lt: String
+  Author_lte: String
+  Author_gt: String
+  Author_gte: String
+  Author_contains: String
+  Author_not_contains: String
+  Author_starts_with: String
+  Author_not_starts_with: String
+  Author_ends_with: String
+  Author_not_ends_with: String
+  AND: [DescriptionScalarWhereInput!]
+  OR: [DescriptionScalarWhereInput!]
+  NOT: [DescriptionScalarWhereInput!]
+}
+
+type DescriptionSubscriptionPayload {
+  mutation: MutationType!
+  node: Description
+  updatedFields: [String!]
+  previousValues: DescriptionPreviousValues
+}
+
+input DescriptionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DescriptionWhereInput
+  AND: [DescriptionSubscriptionWhereInput!]
+  OR: [DescriptionSubscriptionWhereInput!]
+  NOT: [DescriptionSubscriptionWhereInput!]
+}
+
+input DescriptionUpdateDataInput {
+  Subtitle: String
+  Text: String
+  From: String
+  Author: String
+}
+
+input DescriptionUpdateInput {
+  Subtitle: String
+  Text: String
+  From: String
+  Author: String
+}
+
+input DescriptionUpdateManyDataInput {
+  Subtitle: String
+  Text: String
+  From: String
+  Author: String
+}
+
+input DescriptionUpdateManyInput {
+  create: [DescriptionCreateInput!]
+  update: [DescriptionUpdateWithWhereUniqueNestedInput!]
+  upsert: [DescriptionUpsertWithWhereUniqueNestedInput!]
+  delete: [DescriptionWhereUniqueInput!]
+  connect: [DescriptionWhereUniqueInput!]
+  set: [DescriptionWhereUniqueInput!]
+  disconnect: [DescriptionWhereUniqueInput!]
+  deleteMany: [DescriptionScalarWhereInput!]
+  updateMany: [DescriptionUpdateManyWithWhereNestedInput!]
+}
+
+input DescriptionUpdateManyMutationInput {
+  Subtitle: String
+  Text: String
+  From: String
+  Author: String
+}
+
+input DescriptionUpdateManyWithWhereNestedInput {
+  where: DescriptionScalarWhereInput!
+  data: DescriptionUpdateManyDataInput!
+}
+
+input DescriptionUpdateWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput!
+  data: DescriptionUpdateDataInput!
+}
+
+input DescriptionUpsertWithWhereUniqueNestedInput {
+  where: DescriptionWhereUniqueInput!
+  update: DescriptionUpdateDataInput!
+  create: DescriptionCreateInput!
+}
+
+input DescriptionWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  Subtitle: String
+  Subtitle_not: String
+  Subtitle_in: [String!]
+  Subtitle_not_in: [String!]
+  Subtitle_lt: String
+  Subtitle_lte: String
+  Subtitle_gt: String
+  Subtitle_gte: String
+  Subtitle_contains: String
+  Subtitle_not_contains: String
+  Subtitle_starts_with: String
+  Subtitle_not_starts_with: String
+  Subtitle_ends_with: String
+  Subtitle_not_ends_with: String
+  Text: String
+  Text_not: String
+  Text_in: [String!]
+  Text_not_in: [String!]
+  Text_lt: String
+  Text_lte: String
+  Text_gt: String
+  Text_gte: String
+  Text_contains: String
+  Text_not_contains: String
+  Text_starts_with: String
+  Text_not_starts_with: String
+  Text_ends_with: String
+  Text_not_ends_with: String
+  From: String
+  From_not: String
+  From_in: [String!]
+  From_not_in: [String!]
+  From_lt: String
+  From_lte: String
+  From_gt: String
+  From_gte: String
+  From_contains: String
+  From_not_contains: String
+  From_starts_with: String
+  From_not_starts_with: String
+  From_ends_with: String
+  From_not_ends_with: String
+  Author: String
+  Author_not: String
+  Author_in: [String!]
+  Author_not_in: [String!]
+  Author_lt: String
+  Author_lte: String
+  Author_gt: String
+  Author_gte: String
+  Author_contains: String
+  Author_not_contains: String
+  Author_starts_with: String
+  Author_not_starts_with: String
+  Author_ends_with: String
+  Author_not_ends_with: String
+  AND: [DescriptionWhereInput!]
+  OR: [DescriptionWhereInput!]
+  NOT: [DescriptionWhereInput!]
+}
+
+input DescriptionWhereUniqueInput {
+  id: ID
+  Subtitle: String
+  Text: String
+}
+
 scalar Long
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createAtom(data: AtomCreateInput!): Atom!
+  updateAtom(data: AtomUpdateInput!, where: AtomWhereUniqueInput!): Atom
+  updateManyAtoms(data: AtomUpdateManyMutationInput!, where: AtomWhereInput): BatchPayload!
+  upsertAtom(where: AtomWhereUniqueInput!, create: AtomCreateInput!, update: AtomUpdateInput!): Atom!
+  deleteAtom(where: AtomWhereUniqueInput!): Atom
+  deleteManyAtoms(where: AtomWhereInput): BatchPayload!
+  createDescription(data: DescriptionCreateInput!): Description!
+  updateDescription(data: DescriptionUpdateInput!, where: DescriptionWhereUniqueInput!): Description
+  updateManyDescriptions(data: DescriptionUpdateManyMutationInput!, where: DescriptionWhereInput): BatchPayload!
+  upsertDescription(where: DescriptionWhereUniqueInput!, create: DescriptionCreateInput!, update: DescriptionUpdateInput!): Description!
+  deleteDescription(where: DescriptionWhereUniqueInput!): Description
+  deleteManyDescriptions(where: DescriptionWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -40,111 +503,18 @@ type PageInfo {
 }
 
 type Query {
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  atom(where: AtomWhereUniqueInput!): Atom
+  atoms(where: AtomWhereInput, orderBy: AtomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Atom]!
+  atomsConnection(where: AtomWhereInput, orderBy: AtomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AtomConnection!
+  description(where: DescriptionWhereUniqueInput!): Description
+  descriptions(where: DescriptionWhereInput, orderBy: DescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Description]!
+  descriptionsConnection(where: DescriptionWhereInput, orderBy: DescriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DescriptionConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type User {
-  id: ID!
-  name: String!
-}
-
-type UserConnection {
-  pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
-}
-
-input UserCreateInput {
-  id: ID
-  name: String!
-}
-
-type UserEdge {
-  node: User!
-  cursor: String!
-}
-
-enum UserOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-}
-
-type UserPreviousValues {
-  id: ID!
-  name: String!
-}
-
-type UserSubscriptionPayload {
-  mutation: MutationType!
-  node: User
-  updatedFields: [String!]
-  previousValues: UserPreviousValues
-}
-
-input UserSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
-}
-
-input UserUpdateInput {
-  name: String
-}
-
-input UserUpdateManyMutationInput {
-  name: String
-}
-
-input UserWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
-}
-
-input UserWhereUniqueInput {
-  id: ID
+  atom(where: AtomSubscriptionWhereInput): AtomSubscriptionPayload
+  description(where: DescriptionSubscriptionWhereInput): DescriptionSubscriptionPayload
 }
 `
       }

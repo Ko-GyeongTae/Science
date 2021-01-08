@@ -1,0 +1,16 @@
+type Atom {
+    id: ID!
+    Number: String! 
+    Name: String! 
+    locationX: String! 
+    locationY: String!
+    descriptions: [Description!]! 
+}
+
+type Description {
+    id: ID!
+    Subtitle: String! 
+    Text: String! 
+    From: String!
+    Author: String
+}
