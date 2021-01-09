@@ -82,11 +82,23 @@ const AtomTable = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 25px;
-  width: 95%;
+  width: 9%;
   position: relative;
   top: 20px;
 `;
-
+const Vertical = styled.div`
+  display: grid;
+  top:100px;
+  position:relative;
+  width: 5%;
+  height: 520px;
+  margin-left: 1px;
+`;
+const FinalTable = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 97%;
+`;
 const Atoms = () => {
   const { loading, data, error } = useQuery(GET_ATOMS);
   console.log(data);
@@ -99,46 +111,77 @@ const Atoms = () => {
         {loading && <Loading>Loading..</Loading>}
         {error && <h3>{error}</h3>}
       </Header>
-      <AtomTable>
-        <FirstLine>
-          {data?.atoms?.map((a) => {
-            if (a.locationY === "1") {
-              return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
-            }
-          })}
-        </FirstLine>
-        <TT>
-          <LeftTT>
+      <FinalTable>
+        <Vertical>
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>4</p>
+          <p>5</p>
+          <p>6</p>
+          <p>7</p>
+        </Vertical>
+        <AtomTable>
+          <FirstLine>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+            <p>10</p>
+            <p>11</p>
+            <p>12</p>
+            <p>13</p>
+            <p>14</p>
+            <p>15</p>
+            <p>16</p>
+            <p>17</p>
+            <p>18</p>
+          </FirstLine>
+          <FirstLine>
             {data?.atoms?.map((a) => {
-              if (a.locationY === "2" || a.locationY === "3") {
-                if (a.locationX === "1" || a.locationX === "2") {
-                  return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
-                }
+              if (a.locationY === "1") {
+                return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
               }
             })}
-          </LeftTT>
-          <RightTT>
-            {data?.atoms?.map((a) => {
-              if (a.locationY === "2" || a.locationY === "3") {
-                if (a.locationX !== "1" && a.locationX !== "2") {
-                  return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
+          </FirstLine>
+          <TT>
+            <LeftTT>
+              {data?.atoms?.map((a) => {
+                if (a.locationY === "2" || a.locationY === "3") {
+                  if (a.locationX === "1" || a.locationX === "2") {
+                    return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
+                  }
                 }
+              })}
+            </LeftTT>
+            <RightTT>
+              {data?.atoms?.map((a) => {
+                if (a.locationY === "2" || a.locationY === "3") {
+                  if (a.locationX !== "1" && a.locationX !== "2") {
+                    return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
+                  }
+                }
+              })}
+            </RightTT>
+          </TT>
+          <TableAtoms>
+            {data?.atoms?.map((a) => {
+              if (
+                a.locationY !== "1" &&
+                a.locationY !== "2" &&
+                a.locationY !== "3"
+              ) {
+                return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
               }
             })}
-          </RightTT>
-        </TT>
-        <TableAtoms>
-          {data?.atoms?.map((a) => {
-            if (
-              a.locationY !== "1" &&
-              a.locationY !== "2" &&
-              a.locationY !== "3"
-            ) {
-              return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
-            }
-          })}
-        </TableAtoms>
-      </AtomTable>
+          </TableAtoms>
+        </AtomTable>
+      </FinalTable>
     </Container>
   );
 };

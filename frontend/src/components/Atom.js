@@ -8,6 +8,7 @@ const Container = styled.div`
   border-radius: 7px;
   width: 50px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-image: linear-gradient(-45deg, #d3cce3, #e9e4f0);
   background-color: transparent;
 `;
 const ATOM = styled.div`

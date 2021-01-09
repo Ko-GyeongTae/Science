@@ -19,33 +19,37 @@ const GET_DESC = gql`
 `;
 
 const Container = styled.div`
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 25px;
+  height: 100vh;
+  background-image: linear-gradient(-45deg, #d754ab, #fd723a);
+  width: 100%;
+  color: white;
 `;
 const Header = styled.div`
   display: flex;
-  background-image: linear-gradient(-45deg, #d754ab, #fd723a);
-  heigh: 200px;
+  height: 150px;
   width: 100%;
   color: white;
 `;
 const ConTable = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  margin-left:50px;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 25px;
-  width: 100%;
+  position: relative;
+  width: 80%;
 `;
 
 const Title = styled.h1`
-  font-size: 65px;
+  font-size: 120px;
   margin-bottom: 15px;
 `;
 
 const Descs = () => {
   const { name } = useParams();
   const { loading, data } = useQuery(GET_DESC);
-  console.log(data);
   return (
     <Container>
       <Header>
@@ -53,9 +57,17 @@ const Descs = () => {
       </Header>
       <ConTable>
         {data?.descriptions?.map((a) => {
-          console.log(a.name === name);
           if (a.name === name) {
-            return <DESC Subtitle={a.Subtitle} name={a.name} Text={a.Text} From={a.From} Author={a.Author}/>;
+            return (
+              <DESC
+                key={a.id}
+                Subtitle={a.Subtitle}
+                name={a.name}
+                Text={a.Text}
+                From={a.From}
+                Author={a.Author}
+              />
+            );
           }
         })}
       </ConTable>
