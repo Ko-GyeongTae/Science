@@ -19,10 +19,9 @@ const GET_DESC = gql`
 `;
 
 const Container = styled.div`
-  display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 80%;
 `;
 const Header = styled.div`
   display: flex;
@@ -32,8 +31,10 @@ const Header = styled.div`
   color: white;
 `;
 const ConTable = styled.div`
-  display: flex;
-  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 25px;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -51,17 +52,10 @@ const Descs = () => {
         <Title>{loading ? "loading..." : name}</Title>
       </Header>
       <ConTable>
-        {data?.descriptions?.find((a) => {
+        {data?.descriptions?.map((a) => {
           console.log(a.name === name);
-          <p>Hoo</p>
           if (a.name === name) {
-            <DESC
-              Subtitle={a.Subtitle}
-              name={a.name}
-              Text={a.Text}
-              From={a.From}
-              Author={a.Author}
-            />;
+            return <DESC Subtitle={a.Subtitle} name={a.name} Text={a.Text} From={a.From} Author={a.Author}/>;
           }
         })}
       </ConTable>
