@@ -1,0 +1,13 @@
+type Query{
+    atoms:[Atom],
+    descriptions:[Description]
+}
+
+type Description{
+    id: ID!
+    name: String!
+    Subtitle: String!
+    Text: String!
+    From: String!
+    Author: String!
+}

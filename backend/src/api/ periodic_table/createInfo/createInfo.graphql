@@ -1,0 +1,10 @@
+type Mutation {
+    createDescription(
+        name: String!
+        Subtitle: String!
+        Text: String!
+        From: String!
+        Author: String!
+    ): Description!
+}
+
