@@ -4,15 +4,14 @@ type Atom {
     Name: String! 
     locationX: String! 
     locationY: String!
-    descriptions: [Description]
 }
 
 type Description {
     id: ID!
     name: String!
-    Subtitle: String!
-    Text: String!
-    From: String!
-    Author: String!
+    Subtitle: String
+    Text: String
+    From: String
+    Author: String
 }
 
