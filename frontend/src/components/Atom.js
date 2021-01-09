@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "./Atom.css";
 
 const Container = styled.div`
   height: 50px;
@@ -25,13 +26,12 @@ const NUM = styled.div`
 `;
 
 const Atom = ({ Name, Number }) => {
-    console.log(Name, Number);
   return (
     <Container>
-        <Link to={`/${Number}`}>
+        <Link to={`/${Name}` }>
             <NUM>{Number}</NUM>
+            <ATOM>{Name}</ATOM>
         </Link>
-        <ATOM>{Name}</ATOM>
     </Container>
   );
 };

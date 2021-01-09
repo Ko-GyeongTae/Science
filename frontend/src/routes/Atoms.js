@@ -2,7 +2,7 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo";
 import styled from "styled-components";
-import ATOM from "./Atom";
+import ATOM from "../components/Atom";
 
 const GET_ATOMS = gql`
   query {
@@ -103,7 +103,7 @@ const Atoms = () => {
         <FirstLine>
           {data?.atoms?.map((a) => {
             if (a.locationY === "1") {
-              return <ATOM Name={a.Name} Number={a.Number} />;
+              return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
             }
           })}
         </FirstLine>
@@ -112,7 +112,7 @@ const Atoms = () => {
             {data?.atoms?.map((a) => {
               if (a.locationY === "2" || a.locationY === "3") {
                 if (a.locationX === "1" || a.locationX === "2") {
-                  return <ATOM Name={a.Name} Number={a.Number} />;
+                  return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
                 }
               }
             })}
@@ -121,7 +121,7 @@ const Atoms = () => {
             {data?.atoms?.map((a) => {
               if (a.locationY === "2" || a.locationY === "3") {
                 if (a.locationX !== "1" && a.locationX !== "2") {
-                  return <ATOM Name={a.Name} Number={a.Number} />;
+                  return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
                 }
               }
             })}
@@ -134,7 +134,7 @@ const Atoms = () => {
               a.locationY !== "2" &&
               a.locationY !== "3"
             ) {
-              return <ATOM Name={a.Name} Number={a.Number} />;
+              return <ATOM key={a.id} Name={a.Name} Number={a.Number} />;
             }
           })}
         </TableAtoms>
